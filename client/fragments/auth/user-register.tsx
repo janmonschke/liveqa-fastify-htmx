@@ -1,7 +1,7 @@
 import { Type, Static } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
 import { RouteProps } from "../../../types";
-import { LoginForm } from "../../components/auth/LoginForm";
+import { RegisterForm } from "../../components/auth/RegisterForm";
 
 const bodySchema = Type.Object({
   username: Type.String({ minLength: 3 }),
@@ -9,7 +9,7 @@ const bodySchema = Type.Object({
 });
 
 export const method = "post";
-export const path = "/auth/login";
+export const path = "/auth/register";
 
 export const schema: FastifySchema = {
   body: bodySchema,
@@ -18,6 +18,6 @@ export const attachValidation = true;
 
 type Props = RouteProps<{ Body: Static<typeof bodySchema> }>;
 
-export default function UserLoginFragment({ req }: Props) {
-  return <LoginForm error={req.validationError?.message} />;
+export default function UserRegisterFragment({ req }: Props) {
+  return <RegisterForm error={req.validationError?.message} />;
 }

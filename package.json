@@ -1,0 +1,29 @@
+{
+  "name": "htmx-kitchensink",
+  "description": "The htmx-kitchensink starter template for @fastify/htmx",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --ignore vite.config.ts.timestamp-*.mjs server.ts --dev",
+    "build": "npm run build:client && npm run build:server",
+    "start": "tsx server.ts",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
+    "build:server": "vite build --outDir dist/server --ssr /index.jsx"
+  },
+  "dependencies": {
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/htmx": "^0.4.0",
+    "@fastify/one-line-logger": "^2.0.2",
+    "@fastify/type-provider-typebox": "^5.1.0",
+    "@fastify/vite": "^7.0.1",
+    "@kitajs/html": "^3.1.2",
+    "fastify": "^5.2.1",
+    "picnic": "^7.1.0",
+    "vite": "^6.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "typescript-plugin-css-modules": "^5.1.0"
+  }
+}

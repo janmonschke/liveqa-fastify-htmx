@@ -1,0 +1,17 @@
+.Label {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.Input {
+  margin-bottom: 1.5rem;
+}
+
+.Error {
+  padding: 0.5rem;
+  border: 1px solid;
+  border-color: var(--tomato-10);
+  background-color: var(--tomato-3);
+  border-radius: 4px;
+  margin: 0 0 1.5rem 0;
+}

@@ -9,7 +9,7 @@ const server = Fastify({
       target: "@fastify/one-line-logger",
     },
   },
-}).withTypeProvider<TypeBoxTypeProvider>();;
+}).withTypeProvider<TypeBoxTypeProvider>();
 
 // Dummy authentication example used in views/using-layout.jsx
 const session = { user: null };
@@ -24,6 +24,7 @@ server.decorate("db", {
   todoList: ["Do laundry", "Respond to emails", "Write report"],
 });
 
+await server.register(import("@fastify/compress"));
 await server.register(FastifyFormBody);
 await server.register(FastifyVite, {
   root: import.meta.url,

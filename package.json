@@ -10,6 +10,7 @@
     "build:server": "vite build --outDir dist/server --ssr /index.jsx"
   },
   "dependencies": {
+    "@fastify/compress": "^8.0.1",
     "@fastify/formbody": "^8.0.2",
     "@fastify/htmx": "^0.4.0",
     "@fastify/one-line-logger": "^2.0.2",

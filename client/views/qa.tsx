@@ -4,18 +4,19 @@ import { ListItem } from "../components/ListItem";
 import { withParticipant } from "../guards/with-participant";
 import "./data.client.ts";
 
-export const path = "/data";
+export const path = "/qa/:qaId";
 export const ssr = true;
 
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];
 
 export const head = (
   <>
-    <title>Using Data</title>
+    <title>LiveQa</title>
   </>
 );
 
 export default async function ({ app, req, reply }: RouteProps) {
+  console.log(req.participant.id);
   // Just to demonstrate an asynchronous request
   const data = await new Promise((resolve) => {
     // Prepopulated in server.js

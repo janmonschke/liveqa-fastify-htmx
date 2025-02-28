@@ -1,4 +1,11 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import type {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+  preHandlerAsyncHookHandler,
+} from "fastify";
+import { db } from "../db";
+import { Host } from "@prisma/client";
 
 const JWT_COOKIE_NAME = "access_token";
 
@@ -20,17 +27,34 @@ export function signTokenAndSetCookie(
   });
 }
 
-export async function verifyToken(
-  app: FastifyInstance,
-  req: FastifyRequest,
-  reply: FastifyReply
-) {
-  try {
-    const res = await app.jwt.verify(req.cookies.access_token || "", {
-      onlyCookie: true,
-    });
-    req.user = res;
-  } catch (err) {
-    reply.redirect("/login");
+export const authenticated: preHandlerAsyncHookHandler =
+  async function authenticated(req, reply) {
+    try {
+      const res = await this.jwt.verify<TokenContent>(
+        req.cookies.access_token || "",
+        {
+          onlyCookie: true,
+        }
+      );
+      const user = await db.host.findFirst({ where: { id: res.id } });
+      if (!user) {
+        throw new Error("Could not load user from token.");
+      } else {
+        req.user = user;
+      }
+    } catch (err) {
+      this.log.error(err);
+      reply.setCookie(JWT_COOKIE_NAME, "").redirect("/login");
+    }
+  };
+
+export function extractUser(req: FastifyRequest) {
+  const user = req.user as unknown as Host | undefined;
+  if (user) {
+    return user;
+  } else {
+    throw new Error(
+      "req.user is not defined. Make sure the route has a `authenticated` preHandler"
+    );
   }
 }

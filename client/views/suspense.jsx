@@ -7,7 +7,6 @@ import Message from "/components/Message.jsx";
 export const streaming = true;
 
 export default function ({ rid }) {
-  console.log({ rid });
   return (
     <>
       <Suspense rid={rid} fallback={<div>Loading message...</div>}>

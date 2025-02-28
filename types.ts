@@ -26,4 +26,5 @@ export interface RouteProps<
   app: FastifyInstance;
   req: FastifyRequest<RouteInterface>;
   reply: FastifyReply;
+  rid: string;
 }

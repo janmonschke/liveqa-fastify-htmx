@@ -1,6 +1,5 @@
 import { Type, Static } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
-import JWT from "@fastify/jwt";
 import { RouteProps } from "../../../types";
 import { LoginForm } from "../../components/auth/LoginForm";
 import { db } from "../../db";

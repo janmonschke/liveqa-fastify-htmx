@@ -1,4 +1,5 @@
 import { CenteredMediumContainer } from "../CenteredMediumContainer";
+import { ErrorMessage } from "../ErrorMessage";
 import styles from "./AuthForm.module.css";
 
 type Props = {
@@ -11,7 +12,7 @@ export function AuthForm({ action, actionLabel, headline, error }: Props) {
   const isLoading = false;
   return (
     <CenteredMediumContainer id="authform">
-      <h1>{headline}</h1>
+      <h1 safe>{headline}</h1>
       <form
         method="post"
         action={action}
@@ -46,8 +47,10 @@ export function AuthForm({ action, actionLabel, headline, error }: Props) {
           id="password-input"
           hx-preserve="true"
         />
-        {error && <p class={styles.Error}>{error}</p>}
-        <button disabled={isLoading}>{actionLabel}</button>
+        {error && <ErrorMessage message={error} />}
+        <button disabled={isLoading} safe>
+          {actionLabel}
+        </button>
       </form>
     </CenteredMediumContainer>
   );

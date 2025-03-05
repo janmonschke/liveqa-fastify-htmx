@@ -22,6 +22,10 @@ export function qaTopicCrud(qaId: string) {
   return `${qaAdmin(qaId)}/topic`;
 }
 
+export function qaTopicDelete(qaId: string) {
+  return `${qaAdmin(qaId)}/topic/delete`;
+}
+
 export function qaTopicSwap(qaId: string) {
   return `${qaAdmin(qaId)}/topic/swap`;
 }

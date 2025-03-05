@@ -1,0 +1,27 @@
+.ToastContainer {
+  position: fixed;
+  top: 2.5rem;
+  right: 2.5rem;
+  transition: all 150ms;
+  max-width: 20rem;
+  z-index: 100;
+}
+
+.ToastContent {
+  border: 2px solid;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-4);
+  transition: all 150ms ease-in-out;
+  transform: translate(0);
+  will-change: opacity, transform;
+  opacity: 1;
+}
+:global(.htmx-added).ToastContent {
+  opacity: 0;
+  transform: translate(-5px);
+}
+
+.ToastContent.Error {
+  border-color: var(--tomato-10);
+  background-color: var(--tomato-3);
+}

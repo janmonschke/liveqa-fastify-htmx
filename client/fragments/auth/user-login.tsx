@@ -2,9 +2,9 @@ import { Type, Static } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
 import { RouteProps } from "../../../types";
 import { LoginForm } from "../../components/auth/LoginForm";
-import { db } from "../../db";
-import { comparePasswordAndHash } from "../../password";
-import { signTokenAndSetCookie, TokenContent } from "../../views/jwt";
+import { db } from "../../db.server";
+import { comparePasswordAndHash } from "../../password.server";
+import { signTokenAndSetCookie, TokenContent } from "../../jwt.server";
 
 const bodySchema = Type.Object({
   username: Type.String({ minLength: 3 }),

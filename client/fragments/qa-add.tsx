@@ -1,9 +1,10 @@
 import { Type, Static } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
 import { RouteProps } from "../../types";
-import { db } from "../db";
+import { db } from "../db.server";
 import { qaAdmin } from "../urls";
 import { ErrorMessage } from "../components/ErrorMessage";
+import { renderErrorToast } from "../components/Toast";
 
 const bodySchema = Type.Object({
   title: Type.String({ minLength: 1 }),
@@ -22,8 +23,7 @@ type Props = RouteProps<{ Body: Static<typeof bodySchema> }>;
 
 export default async ({ req, reply }: Props) => {
   if (req.validationError?.message) {
-    reply.header("HX-Retarget", "#host-errormessage");
-    return <ErrorMessage message={req.validationError.message} />;
+    return renderErrorToast(reply, req.validationError?.message);
   }
   const { title, hostId } = req.body;
   const qa = await db.qA.create({

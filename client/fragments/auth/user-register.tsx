@@ -2,8 +2,8 @@ import { Type, Static } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
 import { RouteProps } from "../../../types";
 import { RegisterForm } from "../../components/auth/RegisterForm";
-import { db } from "../../db";
-import { generatePasswordHash } from "../../password";
+import { db } from "../../db.server";
+import { generatePasswordHash } from "../../password.server";
 
 const bodySchema = Type.Object({
   username: Type.String({ minLength: 3 }),

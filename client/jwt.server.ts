@@ -4,8 +4,9 @@ import type {
   FastifyRequest,
   preHandlerAsyncHookHandler,
 } from "fastify";
-import { db } from "../db";
+import { db } from "./db.server";
 import { Host } from "@prisma/client";
+import { JWT } from "@fastify/jwt";
 
 const JWT_COOKIE_NAME = "access_token";
 
@@ -27,16 +28,33 @@ export function signTokenAndSetCookie(
   });
 }
 
-export const authenticated: preHandlerAsyncHookHandler =
+async function fetchUserFromToken(req: FastifyRequest, jwt: JWT) {
+  const res = await jwt.verify<TokenContent>(
+    req.cookies.access_token || "",
+    {
+      onlyCookie: true,
+    }
+  );
+  return await db.host.findFirst({ where: { id: res.id } });
+}
+
+export const redirectIfLoggedin: (destination: string) => preHandlerAsyncHookHandler = function (destination) {
+  return async function redirectIf(req, reply) {
+    try {
+      const user = await fetchUserFromToken(req, this.jwt)
+      if (user) {
+        reply.redirect(destination);
+      }
+    } catch (err) {
+      
+    }    
+  }
+}
+
+export const ensureAuthenticated: preHandlerAsyncHookHandler =
   async function authenticated(req, reply) {
     try {
-      const res = await this.jwt.verify<TokenContent>(
-        req.cookies.access_token || "",
-        {
-          onlyCookie: true,
-        }
-      );
-      const user = await db.host.findFirst({ where: { id: res.id } });
+      const user = await fetchUserFromToken(req, this.jwt)
       if (!user) {
         throw new Error("Could not load user from token.");
       } else {
@@ -44,7 +62,7 @@ export const authenticated: preHandlerAsyncHookHandler =
       }
     } catch (err) {
       this.log.error(err);
-      reply.setCookie(JWT_COOKIE_NAME, "").redirect("/login");
+      logout(reply).redirect("/login");
     }
   };
 
@@ -57,4 +75,8 @@ export function extractUser(req: FastifyRequest) {
       "req.user is not defined. Make sure the route has a `authenticated` preHandler"
     );
   }
+}
+
+export function logout(reply: FastifyReply) {
+  return reply.setCookie(JWT_COOKIE_NAME, "");
 }

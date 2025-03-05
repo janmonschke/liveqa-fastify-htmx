@@ -1,13 +1,25 @@
-import { preHandlerAsyncHookHandler, preHandlerHookHandler } from "fastify";
+import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
+import { Participant } from "@prisma/client";
+import { Html } from "@kitajs/html";
+import { Static, Type } from "@fastify/type-provider-typebox";
 import { RouteProps } from "../../types";
-import { ListItem } from "../components/ListItem";
-import { withParticipant } from "../guards/with-participant";
+import {
+  extractParticipant,
+  withParticipant,
+} from "../guards/with-participant";
 import "./data.client.ts";
+import { db } from "../db.server";
 
 export const path = "/qa/:qaId";
-export const ssr = true;
-
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];
+
+const params = Type.Object({
+  qaId: Type.String({ minLength: 1 }),
+});
+
+export const schema: FastifySchema = {
+  params,
+};
 
 export const head = (
   <>
@@ -15,37 +27,78 @@ export const head = (
   </>
 );
 
-export default async function ({ app, req, reply }: RouteProps) {
-  console.log(req.participant.id);
-  // Just to demonstrate an asynchronous request
-  const data = await new Promise((resolve) => {
-    // Prepopulated in server.js
-    resolve(app.db.todoList);
-  });
+export default async function ({
+  req,
+}: RouteProps<{ Params: Static<typeof params> }>) {
+  const participant = extractParticipant(req);
+  const { qaId } = req.params;
+
+  const { qa, participantVotes } = await fetchQaDataForParticipant(
+    qaId,
+    participant
+  );
 
   return (
-    <>
-      <h2>Todo List — Using Data</h2>
-      <ul class="list">
-        {data.map((item, i) => {
-          return <ListItem>{item}</ListItem>;
-        })}
-      </ul>
-      <form
-        action="/list/add"
-        method="post"
-        hx-boost="true"
-        hx-replace-url="false"
-        hx-swap="beforeend scroll:bottom"
-        hx-target=".list"
-        {...{ "hx-on::after-request": "this.reset()" }}
-      >
-        <input name="inputValue" />
-        <button id="add-button">Add</button>
-      </form>
-      <p>
-        <a href="/">Go back to the index</a>
-      </p>
-    </>
+    <section>
+      <h1>{Html.escapeHtml(qa.title)}</h1>
+      {qa.Topic.map((topic) => (
+        <div style={{ marginBottom: "1rem" }}>
+          <h3>{Html.escapeHtml(topic.title)}</h3>
+
+          {/* <QuestionsAndForm
+            qaId={qa.id}
+            votingEnabled={Boolean(qa.QAConfig?.areVotesEnabled)}
+            topic={topic.title}
+            topicId={topic.id}
+            participantId={participant.id}
+            questions={topic.questions}
+            participantVotes={participantVotes}
+          /> */}
+        </div>
+      ))}
+    </section>
   );
+}
+
+async function fetchQaDataForParticipant(
+  qaId: string,
+  participant: Participant
+) {
+  const qa = await db.qA.findFirstOrThrow({
+    where: {
+      id: qaId,
+    },
+    include: {
+      QAConfig: true,
+      Topic: {
+        orderBy: {
+          order: "asc",
+        },
+        include: {
+          questions: {
+            orderBy: [{ votes: { _count: "desc" } }, { createdAt: "asc" }],
+            include: {
+              votes: {
+                select: {
+                  id: true,
+                  questionId: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+  const participantVotes = (
+    await db.vote.findMany({
+      where: {
+        participantId: participant.id,
+      },
+    })
+  ).reduce((acc, curr) => {
+    acc[curr.questionId] = true;
+    return acc;
+  }, {} as Record<string, boolean>);
+  return { qa, participantVotes };
 }

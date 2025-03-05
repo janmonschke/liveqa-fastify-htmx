@@ -1,5 +1,5 @@
 import { Html } from "@kitajs/html";
-import { db } from "../../db";
+import { db } from "../../db.server";
 import { qaAdmin } from "../../urls";
 
 export async function QaList({ hostId }: { hostId: string }) {

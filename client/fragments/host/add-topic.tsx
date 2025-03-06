@@ -7,6 +7,8 @@ import { db } from "../../db.server";
 import QaConfigForm from "../../components/host/QaConfigForm";
 import { ensureAuthenticated } from "../../jwt.server";
 import { AddTopicForm } from "../../components/host/AddTopicForm";
+import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
+import { HostQaTopic } from "../../components/host/HostQaTopic";
 
 export const path = "/qa/admin/:qaId/topic";
 export const method = "post";
@@ -43,20 +45,25 @@ export default async function ({
       order: req.body.order,
     },
     include: {
-      QA: {
-        include: { Topic: true },
-      },
+      questions: true,
     },
   });
   console.log("todo emit change");
+  const qa = await fetchQaWithTopicsAndQuestions(qaId);
   return (
     <>
       {/* Adds the item topic to the list */}
-      <div hx-swap-oob="beforeend:#qa-admin-topic-list">
-        <li>{Html.escapeHtml(topic.title)}</li>
+      <div hx-swap-oob="beforeend:#qa-admin-topic-list ol">
+        <li>
+          <HostQaTopic
+            topic={topic}
+            topics={qa.Topic}
+            index={qa.Topic.length - 1}
+          />
+        </li>
       </div>
       {/* Resets the form */}
-      <AddTopicForm qaId={qaId} topics={topic.QA.Topic} />
+      <AddTopicForm qaId={qaId} topics={qa.Topic} />
     </>
   );
 }

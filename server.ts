@@ -32,7 +32,7 @@ await server.register(jwt, {
 });
 await server.register(FastifySSEPlugin);
 await server.register(cookie, cookieOptions);
-// await server.register(import("@fastify/compress"));
+await server.register(import("@fastify/compress"));
 await server.register(FastifyFormBody);
 await server.register(FastifyVite, {
   root: import.meta.url,

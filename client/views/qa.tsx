@@ -9,6 +9,7 @@ import {
 } from "../guards/with-participant";
 import "./data.client.ts";
 import { db } from "../db.server";
+import "./qa.client.ts";
 
 export const path = "/qa/:qaId";
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];

@@ -9,6 +9,7 @@ import QaConfigForm from "../components/host/QaConfigForm";
 import { AddTopicForm } from "../components/host/AddTopicForm";
 import { HostQaTopicsList } from "../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
+import ArrowTopRight from "../components/icons/ArrowTopRight";
 
 export const path = "/qa/admin/:qaId";
 
@@ -37,10 +38,12 @@ export default async function ({
       <div>
         <a href={qaQr(qa.id)} target="_blank" rel="noreferrer">
           Open QR code
+          <ArrowTopRight />
           {/* <ArrowTopRightIcon /> */}
         </a>
         <a href={qaUrl(qa.id)} target="_blank" rel="noreferrer">
           Open Live QA
+          <ArrowTopRight />
           {/* <ArrowTopRightIcon /> */}
         </a>
       </div>

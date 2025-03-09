@@ -4,11 +4,11 @@ import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
 import { isQaAdmin } from "../../guards/is-qa-admin";
 import { RouteProps } from "../../../types";
 import { db } from "../../db.server";
-import QaConfigForm from "../../components/host/QaConfigForm";
 import { ensureAuthenticated } from "../../jwt.server";
 import { AddTopicForm } from "../../components/host/AddTopicForm";
 import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
 import { HostQaTopic } from "../../components/host/HostQaTopic";
+import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
 
 export const path = "/qa/admin/:qaId/topic";
 export const method = "post";
@@ -48,7 +48,7 @@ export default async function ({
       questions: true,
     },
   });
-  console.log("todo emit change");
+  emitQaChangedEvent(qaId, qaConfigChangedEventName(qaId));
   const qa = await fetchQaWithTopicsAndQuestions(qaId);
   return (
     <>

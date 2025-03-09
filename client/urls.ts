@@ -2,6 +2,10 @@ export function qa(qaId: string) {
   return `/qa/${qaId}`;
 }
 
+export function qaSse(qaId: string) {
+  return `/sse${qa(qaId)}`;
+}
+
 export function qaQr(qaId: string) {
   return `/qa/qr/${qaId}`;
 }
@@ -10,8 +14,16 @@ export function qaQuestionCrud(qaId: string) {
   return `${qa(qaId)}/question`;
 }
 
+export function qaQuestionDelete(qaId: string) {
+  return `${qa(qaId)}/question/delete`;
+}
+
 export function qaVoteCrud(qaId: string) {
   return `${qa(qaId)}/vote`;
+}
+
+export function qaTopicsList(qaId: string) {
+  return `${qa(qaId)}/topics`;
 }
 
 export function qaAdmin(qaId: string) {

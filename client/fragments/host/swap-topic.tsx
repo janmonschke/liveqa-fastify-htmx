@@ -7,6 +7,7 @@ import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";
 import { HostQaTopicsList } from "../../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
+import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
 
 export const path = "/qa/admin/:qaId/topic/swap";
 export const method = "post";
@@ -59,7 +60,7 @@ export default async function ({
       },
     }),
   ]);
-  console.log("todo emit change");
+  emitQaChangedEvent(qaId, qaConfigChangedEventName(qaId));
   const qa = await fetchQaWithTopicsAndQuestions(qaId);
   return <HostQaTopicsList topics={qa.Topic} />;
 }

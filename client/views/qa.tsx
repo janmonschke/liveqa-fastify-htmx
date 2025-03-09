@@ -9,7 +9,10 @@ import {
 } from "../guards/with-participant";
 import "./data.client.ts";
 import { db } from "../db.server";
+import { qaSse, qaTopicsList } from "../urls";
 import "./qa.client.ts";
+import { ParticipantTopicList } from "../components/participant/ParticipantTopicList";
+import { qaConfigChangedEventName } from "../../events";
 
 export const path = "/qa/:qaId";
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];
@@ -40,23 +43,18 @@ export default async function ({
   );
 
   return (
-    <section>
+    <section hx-ext="sse" sse-connect={qaSse(qaId)}>
       <h1>{Html.escapeHtml(qa.title)}</h1>
-      {qa.Topic.map((topic) => (
-        <div style={{ marginBottom: "1rem" }}>
-          <h3>{Html.escapeHtml(topic.title)}</h3>
-
-          {/* <QuestionsAndForm
-            qaId={qa.id}
-            votingEnabled={Boolean(qa.QAConfig?.areVotesEnabled)}
-            topic={topic.title}
-            topicId={topic.id}
-            participantId={participant.id}
-            questions={topic.questions}
-            participantVotes={participantVotes}
-          /> */}
-        </div>
-      ))}
+      <div
+        id="participant-topic-list"
+        hx-get={qaTopicsList(qaId)}
+        hx-trigger={`sse:${qaConfigChangedEventName(qaId)}`}
+      >
+        <ParticipantTopicList
+          topics={qa.Topic}
+          participantId={participant.id}
+        />
+      </div>
     </section>
   );
 }

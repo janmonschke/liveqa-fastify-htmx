@@ -4,6 +4,7 @@ import { isQaAdmin } from "../../guards/is-qa-admin";
 import { RouteProps } from "../../../types";
 import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";
+import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
 
 export const path = "/qa/admin/:qaId/topic/delete";
 export const method = "post";
@@ -31,12 +32,14 @@ export default async function ({
   Params: Static<typeof params>;
   Body: Static<typeof body>;
 }>) {
+  const { qaId } = req.params;
   await db.topic.delete({
     where: {
       id: req.body.topicId,
-      qaId: req.params.qaId,
+      qaId,
     },
   });
   console.log("todo emit change");
+  emitQaChangedEvent(qaId, qaConfigChangedEventName(qaId));
   return "";
 }

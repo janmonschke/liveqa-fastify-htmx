@@ -4,7 +4,8 @@ import EventEmitter from "node:events";
 export const emitter = remember("emitter", () => new EventEmitter());
 
 type QaId = string;
-export type QaConfigChanged = `qa:config:changed:${QaId}`;
+export const qaConfigChangedPrefix = `qa:config:changed`;
+export type QaConfigChanged = `${typeof qaConfigChangedPrefix}:${QaId}`;
 type TopicId = string;
 export type QaTopicChanged = `qa:topic:changed:${TopicId}`;
 export type QaChanged = `qa:changed:${QaId}`;

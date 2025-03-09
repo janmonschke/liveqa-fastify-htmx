@@ -7,7 +7,6 @@ import {
   extractParticipant,
   withParticipant,
 } from "../guards/with-participant";
-import "./data.client.ts";
 import { db } from "../db.server";
 import { qaSse, qaTopicsList } from "../urls";
 import "./qa.client.ts";

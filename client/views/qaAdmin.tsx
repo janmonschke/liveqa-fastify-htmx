@@ -9,7 +9,7 @@ import QaConfigForm from "../components/host/QaConfigForm";
 import { AddTopicForm } from "../components/host/AddTopicForm";
 import { HostQaTopicsList } from "../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
-import ArrowTopRight from "../components/icons/ArrowTopRight";
+import { ArrowTopRight } from "../components/icons/Icons";
 
 export const path = "/qa/admin/:qaId";
 

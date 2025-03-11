@@ -4,7 +4,7 @@ import type {
   FastifyRequest,
   RouteGenericInterface,
 } from "fastify";
-import { Topic, Question } from "@prisma/client";
+import { Topic, Question, Vote } from "@prisma/client";
 
 interface RedirectToWithoutHxArguments<
   RouteInterface extends RouteGenericInterface = RouteGenericInterface
@@ -31,4 +31,11 @@ export interface RouteProps<
 }
 export interface TopicWithQuestions extends Topic {
   questions: Question[];
+}
+
+export interface QuestionWithVotes extends Question {
+  votes: Vote[];
+}
+export interface TopicWithQuestionsAndVotes extends Topic {
+  questions: QuestionWithVotes[];
 }

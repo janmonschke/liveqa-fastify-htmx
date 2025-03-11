@@ -1,16 +1,13 @@
 import { Html } from "@kitajs/html";
-import { Question, Topic } from "@prisma/client";
 import { QuestionList, questionListElementForTopicIc } from "./QuestionList";
 import { qaQuestionCrud } from "../../urls";
-interface TopicWithQuestions extends Topic {
-  questions: Question[];
-}
+import { TopicWithQuestionsAndVotes } from "../../../types";
 
 export function ParticipantTopicList({
   topics,
   participantId,
 }: {
-  topics: TopicWithQuestions[];
+  topics: TopicWithQuestionsAndVotes[];
   participantId: string;
 }) {
   return (

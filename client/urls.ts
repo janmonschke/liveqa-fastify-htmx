@@ -18,8 +18,16 @@ export function qaQuestionDelete(qaId: string) {
   return `${qa(qaId)}/question/delete`;
 }
 
-export function qaVoteCrud(qaId: string) {
-  return `${qa(qaId)}/vote`;
+export function questionList(qaId: string, topicId: string) {
+  return `${qa(qaId)}/topic/${topicId}/questions`;
+}
+
+export function qaAddVote(qaId: string) {
+  return `${qa(qaId)}/add-vote`;
+}
+
+export function qaDeleteVote(qaId: string) {
+  return `${qa(qaId)}/delete-vote`;
 }
 
 export function qaTopicsList(qaId: string) {

@@ -35,7 +35,7 @@ export function initializeSSEServer(server: FastifyInstance) {
           for await (const [event] of on(emitter, eventName)) {
             yield {
               event: event ? event.name : "test",
-              data: JSON.stringify({ event: Math.random() }),
+              data: "<div />",
             };
           }
         })()

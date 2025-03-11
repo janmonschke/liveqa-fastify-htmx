@@ -77,4 +77,6 @@ model Vote {
   participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
   Question      Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
   questionId    String
+
+  @@unique([participantId, questionId], name: "participantId_questionId")
 }

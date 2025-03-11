@@ -7,6 +7,7 @@ import {
 } from "../../guards/with-participant";
 import { db } from "../../db.server";
 import { QuestionListItem } from "../../components/participant/Question";
+import { emitQaChangedEvent, qaTopicChangedEventName } from "../../../events";
 
 export const path = `/qa/:qaId/question`;
 export const method = "post";
@@ -31,19 +32,23 @@ export default async function ({
   Params: Static<typeof params>;
   Body: Static<typeof body>;
 }>) {
+  const { qaId } = req.params;
+  const { topicId, text } = req.body;
   const participant = extractParticipant(req);
   const question = await db.question.create({
     data: {
-      topicId: req.body.topicId,
+      topicId,
+      text,
       participantId: participant.id,
-      text: req.body.text,
     },
   });
+  emitQaChangedEvent(qaId, qaTopicChangedEventName(topicId));
   return (
     <QuestionListItem
-      qaId={req.params.qaId}
+      qaId={qaId}
       question={question}
       canDelete={true}
+      canVote={true}
     />
   );
 }

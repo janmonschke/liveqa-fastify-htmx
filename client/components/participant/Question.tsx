@@ -33,7 +33,9 @@ export function QuestionListItem({
           <input type="hidden" name="topicId" value={question.topicId} />
           <input type="hidden" name="questionId" value={question.id} />
 
-          <button type="submit">Delete</button>
+          <button type="submit" class="error">
+            Delete
+          </button>
         </form>
       ) : null}
       {canVote ? (

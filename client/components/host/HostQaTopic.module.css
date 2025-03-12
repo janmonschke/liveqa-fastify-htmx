@@ -1,0 +1,10 @@
+.Title {
+  padding-bottom: 0.2em;
+}
+
+.Actions {
+  display: flex;
+  gap: 0.5em;
+  flex-direction: row;
+  align-items: center;
+}

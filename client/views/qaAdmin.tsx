@@ -10,6 +10,7 @@ import { AddTopicForm } from "../components/host/AddTopicForm";
 import { HostQaTopicsList } from "../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
 import { ArrowTopRight } from "../components/icons/Icons";
+import styles from "./qaAdmin.module.css";
 
 export const path = "/qa/admin/:qaId";
 
@@ -35,18 +36,16 @@ export default async function ({
   return (
     <section>
       <h1>{Html.escapeHtml(qa.title)}</h1>
-      <div>
+      <section class={styles.Links}>
         <a href={qaQr(qa.id)} target="_blank" rel="noreferrer">
           Open QR code
           <ArrowTopRight />
-          {/* <ArrowTopRightIcon /> */}
         </a>
         <a href={qaUrl(qa.id)} target="_blank" rel="noreferrer">
           Open Live QA
           <ArrowTopRight />
-          {/* <ArrowTopRightIcon /> */}
         </a>
-      </div>
+      </section>
       <h2>Config</h2>
       {qa.QAConfig ? <QaConfigForm qaConfig={qa.QAConfig} /> : null}
       <h2>Topics</h2>

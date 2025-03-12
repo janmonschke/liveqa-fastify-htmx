@@ -1,0 +1,9 @@
+.Contents {
+  margin: 1em 7%;
+}
+
+@media (min-width: 600px) {
+  .Contents {
+    margin: 1em 25%;
+  }
+}

@@ -2,6 +2,8 @@ import { Html } from "@kitajs/html";
 import { QuestionList, questionListElementForTopicIc } from "./QuestionList";
 import { qaQuestionCrud } from "../../urls";
 import { TopicWithQuestionsAndVotes } from "../../../types";
+import baseStyles from "../../assets/base.module.css";
+import { Button } from "../Button";
 
 export function ParticipantTopicList({
   topics,
@@ -12,10 +14,10 @@ export function ParticipantTopicList({
 }) {
   return (
     <section>
-      <ol>
+      <ol class={baseStyles.OrderedList}>
         {topics.map((topic) => (
           <li>
-            <h3>{Html.escapeHtml(topic.title)}</h3>
+            <h2>{Html.escapeHtml(topic.title)}</h2>
             <QuestionList
               participantId={participantId}
               topicId={topic.id}
@@ -29,6 +31,8 @@ export function ParticipantTopicList({
               hx-replace-url="false"
               hx-target={`#${questionListElementForTopicIc(topic.id)}`}
               hx-swap="beforeend"
+              hx-disabled-elt="find button"
+              hx-indicator="find button"
               {...{ "hx-on::after-request": "this.reset()" }}
             >
               <input type="hidden" name="topicId" value={topic.id} />
@@ -38,7 +42,7 @@ export function ParticipantTopicList({
                 name="text"
                 required
               />
-              <button type="submit">Add question</button>
+              <Button>Add question</Button>
             </form>
           </li>
         ))}

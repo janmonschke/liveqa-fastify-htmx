@@ -2,6 +2,7 @@ import { Question as QuestionType, Vote } from "@prisma/client";
 import { QuestionListItem } from "./Question";
 import { questionList } from "../../urls";
 import { qaTopicChangedEventName } from "../../../events";
+import baseStyles from "../../assets/base.module.css";
 
 interface QuestionWithVotes extends QuestionType {
   votes: Vote[];
@@ -24,6 +25,7 @@ export function QuestionList({
 }) {
   return (
     <ol
+      class={baseStyles.OrderedList}
       id={questionListElementForTopicIc(topicId)}
       hx-get={questionList(qaId, topicId)}
       hx-trigger={`sse:${qaTopicChangedEventName(topicId)}`}

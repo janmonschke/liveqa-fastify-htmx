@@ -1,0 +1,27 @@
+:global(.htmx-request).Button {
+  animation: pulsingOpacity 1.5s linear infinite both;
+}
+
+.Small {
+  font-size: 0.5em;
+}
+
+.Medium {
+  font-size: 0.8em;
+}
+
+.Large {
+  font-size: 1.2em;
+}
+
+@keyframes pulsingOpacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}

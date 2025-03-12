@@ -1,0 +1,10 @@
+.Container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Headline {
+  padding-top: 0;
+  text-align: center;
+}

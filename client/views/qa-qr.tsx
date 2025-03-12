@@ -2,6 +2,7 @@ import { Static, Type } from "@fastify/type-provider-typebox";
 import { FastifySchema } from "fastify";
 import { RouteProps } from "../../types";
 import { qa } from "../urls";
+import styles from "./qa-qr.module.css";
 import "./qa-qr.client.ts";
 
 export const path = "/qa/qr/:qaId";
@@ -19,9 +20,11 @@ export default async function ({
 }: RouteProps<{ Params: Static<typeof params> }>) {
   const url = qa(req.params.qaId);
   return (
-    <section>
+    <section class={styles.Container}>
       <canvas id="qrcode" data-path={url} />
-      <h2 id="qrurl"></h2>
+      <h1 class={styles.Headline}>
+        Add questions, vote for questions, fully anonymously.
+      </h1>
     </section>
   );
 }

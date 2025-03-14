@@ -14,12 +14,10 @@
     "@fastify/compress": "^8.0.1",
     "@fastify/cookie": "^11.0.2",
     "@fastify/formbody": "^8.0.2",
-    "@fastify/htmx": "^0.4.0",
     "@fastify/jwt": "^9.0.4",
     "@fastify/one-line-logger": "^2.0.2",
     "@fastify/type-provider-typebox": "^5.1.0",
     "@fastify/vite": "^7.0.1",
-    "@kitajs/html": "^3.1.2",
     "@prisma/client": "^6.4.1",
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
@@ -32,6 +30,7 @@
     "vite": "^6.1.1"
   },
   "devDependencies": {
+    "@fastify/htmx": "https://gitpkg.vercel.app/janmonschke/fastify-vite/packages/fastify-htmx?06f308441e78d098fdfa799d23de3dcc1765bdb6",
     "@kitajs/ts-html-plugin": "^4.1.1",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^22.13.4",

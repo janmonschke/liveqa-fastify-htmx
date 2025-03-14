@@ -4,7 +4,7 @@ import type {
   FastifyRequest,
   RouteGenericInterface,
 } from "fastify";
-import { Topic, Question, Vote } from "@prisma/client";
+import type { Topic, Question, Vote } from "@prisma/client";
 
 interface RedirectToWithoutHxArguments<
   RouteInterface extends RouteGenericInterface = RouteGenericInterface

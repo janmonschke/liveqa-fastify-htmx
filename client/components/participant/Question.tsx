@@ -1,5 +1,5 @@
 import { Html } from "@kitajs/html";
-import { Question } from "@prisma/client";
+import type { Question } from "@prisma/client";
 import { qaAddVote, qaDeleteVote, qaQuestionDelete } from "../../urls";
 import { DoubleArrowDown, DoubleArrowUp } from "../icons/Icons";
 import { qaQuestionDelete as questionDeleteEvent } from "../../../events";

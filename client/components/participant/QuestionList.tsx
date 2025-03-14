@@ -1,4 +1,4 @@
-import { Question as QuestionType, Vote } from "@prisma/client";
+import type { Question as QuestionType, Vote } from "@prisma/client";
 import { QuestionListItem } from "./Question";
 import { questionList } from "../../urls";
 import { qaTopicChangedEventName } from "../../../events";

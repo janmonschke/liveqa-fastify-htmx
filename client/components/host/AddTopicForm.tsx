@@ -1,4 +1,4 @@
-import { Topic } from "@prisma/client";
+import type { Topic } from "@prisma/client";
 import { qaTopicCrud } from "../../urls";
 
 export function AddTopicForm({

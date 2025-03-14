@@ -1,4 +1,4 @@
-import { Participant } from "@prisma/client";
+import type { Participant } from "@prisma/client";
 import type {
   FastifyInstance,
   FastifyRequest,

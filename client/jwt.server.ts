@@ -5,7 +5,7 @@ import type {
   preHandlerAsyncHookHandler,
 } from "fastify";
 import { db } from "./db.server";
-import { Host } from "@prisma/client";
+import type { Host } from "@prisma/client";
 import { JWT } from "@fastify/jwt";
 
 const JWT_COOKIE_NAME = "access_token";
@@ -29,32 +29,29 @@ export function signTokenAndSetCookie(
 }
 
 async function fetchUserFromToken(req: FastifyRequest, jwt: JWT) {
-  const res = await jwt.verify<TokenContent>(
-    req.cookies.access_token || "",
-    {
-      onlyCookie: true,
-    }
-  );
+  const res = await jwt.verify<TokenContent>(req.cookies.access_token || "", {
+    onlyCookie: true,
+  });
   return await db.host.findFirst({ where: { id: res.id } });
 }
 
-export const redirectIfLoggedin: (destination: string) => preHandlerAsyncHookHandler = function (destination) {
+export const redirectIfLoggedin: (
+  destination: string
+) => preHandlerAsyncHookHandler = function (destination) {
   return async function redirectIf(req, reply) {
     try {
-      const user = await fetchUserFromToken(req, this.jwt)
+      const user = await fetchUserFromToken(req, this.jwt);
       if (user) {
         reply.redirect(destination);
       }
-    } catch (err) {
-      
-    }    
-  }
-}
+    } catch (err) {}
+  };
+};
 
 export const ensureAuthenticated: preHandlerAsyncHookHandler =
   async function authenticated(req, reply) {
     try {
-      const user = await fetchUserFromToken(req, this.jwt)
+      const user = await fetchUserFromToken(req, this.jwt);
       if (!user) {
         throw new Error("Could not load user from token.");
       } else {

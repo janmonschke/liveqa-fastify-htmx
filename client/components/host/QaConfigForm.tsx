@@ -1,4 +1,4 @@
-import { QAConfig } from "@prisma/client";
+import type { QAConfig } from "@prisma/client";
 
 export default function ({ qaConfig }: { qaConfig: QAConfig }) {
   return (

@@ -39,5 +39,8 @@
     "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "typescript-plugin-css-modules": "^5.1.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }

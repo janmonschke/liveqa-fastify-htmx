@@ -2,7 +2,10 @@ import { Static, Type } from "@fastify/type-provider-typebox";
 import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
 import { RouteProps } from "../../../types";
 import { db } from "../../db.server";
-import { emitQaChangedEvent, qaTopicChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaTopicChangedEventName,
+} from "../../../events.server";
 import {
   extractParticipant,
   withParticipant,

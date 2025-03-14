@@ -7,7 +7,10 @@ import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";
 import { HostQaTopicsList } from "../../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
-import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaConfigChangedEventName,
+} from "../../../events.server";
 
 export const path = "/qa/admin/:qaId/topic/swap";
 export const method = "post";

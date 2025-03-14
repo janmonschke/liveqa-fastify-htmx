@@ -8,7 +8,10 @@ import { ensureAuthenticated } from "../../jwt.server";
 import { AddTopicForm } from "../../components/host/AddTopicForm";
 import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
 import { HostQaTopic } from "../../components/host/HostQaTopic";
-import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaConfigChangedEventName,
+} from "../../../events.server";
 
 export const path = "/qa/admin/:qaId/topic";
 export const method = "post";

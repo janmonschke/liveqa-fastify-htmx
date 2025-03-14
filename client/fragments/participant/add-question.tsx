@@ -7,7 +7,10 @@ import {
 } from "../../guards/with-participant";
 import { db } from "../../db.server";
 import { QuestionListItem } from "../../components/participant/Question";
-import { emitQaChangedEvent, qaTopicChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaTopicChangedEventName,
+} from "../../../events.server";
 
 export const path = `/qa/:qaId/question`;
 export const method = "post";

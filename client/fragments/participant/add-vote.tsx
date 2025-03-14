@@ -6,7 +6,10 @@ import {
   withParticipant,
 } from "../../guards/with-participant";
 import { db } from "../../db.server";
-import { emitQaChangedEvent, qaTopicChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaTopicChangedEventName,
+} from "../../../events.server";
 
 export const path = `/qa/:qaId/add-vote`;
 export const method = "post";

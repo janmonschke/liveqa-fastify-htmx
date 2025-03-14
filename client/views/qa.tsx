@@ -9,7 +9,7 @@ import {
 import { qaSse, qaTopicsList } from "../urls";
 import "./qa.client.ts";
 import { ParticipantTopicList } from "../components/participant/ParticipantTopicList";
-import { qaConfigChangedEventName } from "../../events";
+import { qaConfigChangedEventName } from "../../events.server";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
 
 export const path = "/qa/:qaId";

@@ -1,7 +1,7 @@
 import type { Question as QuestionType, Vote } from "@prisma/client";
 import { QuestionListItem } from "./Question";
 import { questionList } from "../../urls";
-import { qaTopicChangedEventName } from "../../../events";
+import { qaTopicChangedEventName } from "../../../events.server";
 import baseStyles from "../../assets/base.module.css";
 
 interface QuestionWithVotes extends QuestionType {

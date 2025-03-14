@@ -4,7 +4,10 @@ import { isQaAdmin } from "../../guards/is-qa-admin";
 import { RouteProps } from "../../../types";
 import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";
-import { emitQaChangedEvent, qaConfigChangedEventName } from "../../../events";
+import {
+  emitQaChangedEvent,
+  qaConfigChangedEventName,
+} from "../../../events.server";
 
 export const path = "/qa/admin/:qaId/topic/delete";
 export const method = "post";

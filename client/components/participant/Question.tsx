@@ -2,7 +2,7 @@ import { Html } from "@kitajs/html";
 import type { Question } from "@prisma/client";
 import { qaAddVote, qaDeleteVote, qaQuestionDelete } from "../../urls";
 import { DoubleArrowDown, DoubleArrowUp } from "../icons/Icons";
-import { qaQuestionDelete as questionDeleteEvent } from "../../../events";
+import { qaQuestionDelete as questionDeleteEvent } from "../../../events.server";
 import styles from "./Question.module.css";
 import { Button } from "../Button";
 

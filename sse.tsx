@@ -5,7 +5,7 @@ import {
   emitter,
   qaChangedEventName,
   qaConfigChangedEventName,
-} from "./events";
+} from "./events.server";
 import { on } from "node:events";
 
 setInterval(() => {

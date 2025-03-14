@@ -7,7 +7,8 @@
     "build": "npm run build:client && npm run build:server",
     "start": "tsx server.ts",
     "build:client": "vite build --outDir dist/client --ssrManifest",
-    "build:server": "vite build --outDir dist/server --ssr /index.jsx"
+    "build:server": "vite build --outDir dist/server --ssr /index.jsx",
+    "migrate": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@epic-web/remember": "^1.1.0",

@@ -43,4 +43,6 @@ initializeSSEServer(server);
 initializeGuards(server);
 
 await server.vite.ready();
-await server.listen({ port: 3000 });
+
+const port = parseInt(process.env.PORT || "3000");
+await server.listen({ port, host: "0.0.0.0" });

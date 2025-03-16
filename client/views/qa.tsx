@@ -7,10 +7,11 @@ import {
   withParticipant,
 } from "../guards/with-participant.server";
 import { qaSse, qaTopicsList } from "../urls";
-import "./qa.client.ts";
+import QuestionModal from "../components/participant/QuestionModal";
 import { ParticipantTopicList } from "../components/participant/ParticipantTopicList";
 import { qaConfigChangedEventName } from "../../events.server";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
+import "./qa.client.ts";
 
 export const path = "/qa/:qaId";
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];
@@ -35,6 +36,7 @@ export default async function ({
 
   return (
     <section hx-ext="sse" sse-connect={qaSse(qaId)}>
+      <QuestionModal />
       <h1>{escapeHtml(qa.title)}</h1>
       <div
         id="participant-topic-list"

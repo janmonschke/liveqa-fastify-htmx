@@ -4,6 +4,7 @@ import { qaQuestionCrud } from "../../urls";
 import type { TopicWithQuestionsAndVotes } from "../../../types";
 import baseStyles from "../../assets/base.module.css";
 import { Button } from "../Button";
+import { showQuestionDialog } from "./QuestionModal";
 
 export function ParticipantTopicList({
   topics,
@@ -24,26 +25,14 @@ export function ParticipantTopicList({
               questions={topic.questions}
               qaId={topic.qaId}
             />
-            <form
-              method="post"
-              action={qaQuestionCrud(topic.qaId)}
-              hx-boost="true"
-              hx-replace-url="false"
-              hx-target={`#${questionListElementForTopicIc(topic.id)}`}
-              hx-swap="beforeend"
-              hx-disabled-elt="find button"
-              hx-indicator="find button"
-              {...{ "hx-on::after-request": "this.reset()" }}
+            <button
+              hx-get={`/qa/${topic.qaId}/topic/${topic.id}/question-form`}
+              hx-trigger="mouseover,focus"
+              hx-target="#question-dialog"
+              onclick={showQuestionDialog}
             >
-              <input type="hidden" name="topicId" value={topic.id} />
-              <input
-                type="text"
-                placeholder="Question..."
-                name="text"
-                required
-              />
-              <Button>Add question</Button>
-            </form>
+              Add question
+            </button>
           </li>
         ))}
       </ol>

@@ -1,10 +1,9 @@
 import { escapeHtml } from "@kitajs/html";
-import { QuestionList, questionListElementForTopicIc } from "./QuestionList";
-import { qaQuestionCrud } from "../../urls";
+import { QuestionList } from "./QuestionList";
 import type { TopicWithQuestionsAndVotes } from "../../../types";
 import baseStyles from "../../assets/base.module.css";
 import { Button } from "../Button";
-import { showQuestionDialog } from "./QuestionModal";
+import { questionModalId, showQuestionDialog } from "./ModalConfig";
 
 export function ParticipantTopicList({
   topics,
@@ -25,14 +24,14 @@ export function ParticipantTopicList({
               questions={topic.questions}
               qaId={topic.qaId}
             />
-            <button
+            <Button
               hx-get={`/qa/${topic.qaId}/topic/${topic.id}/question-form`}
               hx-trigger="mouseover,focus"
-              hx-target="#question-dialog"
+              hx-target={`#${questionModalId}`}
               onclick={showQuestionDialog}
             >
               Add question
-            </button>
+            </Button>
           </li>
         ))}
       </ol>

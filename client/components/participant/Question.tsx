@@ -55,7 +55,7 @@ export function QuestionListItem({
             <input type="hidden" name="topicId" value={question.topicId} />
             <input type="hidden" name="questionId" value={question.id} />
 
-            <Button>
+            <Button title="Add vote">
               <DoubleArrowUp />
             </Button>
           </form>
@@ -72,7 +72,7 @@ export function QuestionListItem({
             <input type="hidden" name="topicId" value={question.topicId} />
             <input type="hidden" name="questionId" value={question.id} />
 
-            <Button>
+            <Button title="Remove vote">
               <DoubleArrowDown />
             </Button>
           </form>

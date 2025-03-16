@@ -21,14 +21,17 @@ export function Button({
   children,
   size = "medium",
   variant = "default",
-}: PropsWithChildren<{
-  size?: Size;
-  variant?: Variant;
-}>) {
+  ...rest
+}: PropsWithChildren<
+  {
+    size?: Size;
+    variant?: Variant;
+  } & JSX.HtmlButtonTag
+>) {
   const klass = clsx(styles.Button, SizeToClass[size], VariantToClass[variant]);
 
   return (
-    <button type="submit" class={klass}>
+    <button type="submit" class={klass} {...rest}>
       {children}
     </button>
   );

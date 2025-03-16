@@ -7,7 +7,7 @@ import { db } from "../../db.server";
 import { qaQuestionCrud } from "../../urls";
 import { questionListElementForTopicIc } from "../../components/participant/QuestionList";
 import { Button } from "../../components/Button";
-import { hideQuestionDialog } from "../../components/participant/QuestionModal";
+import { hideQuestionDialog } from "../../components/participant/ModalConfig";
 
 export const path = `/qa/:qaId/topic/:topicId/question-form`;
 export const preHandler: preHandlerAsyncHookHandler[] = [withParticipant];

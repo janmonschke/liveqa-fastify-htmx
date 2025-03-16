@@ -1,4 +1,4 @@
-import { Html } from "@kitajs/html";
+import { escapeHtml } from "@kitajs/html";
 import type { Question } from "@prisma/client";
 import { qaAddVote, qaDeleteVote, qaQuestionDelete } from "../../urls";
 import { DoubleArrowDown, DoubleArrowUp } from "../icons/Icons";
@@ -23,7 +23,7 @@ export function QuestionListItem({
       sse-swap={`sse:${questionDeleteEvent(qaId, question.id)}`}
       hx-swap="delete"
     >
-      {Html.escapeHtml(question.text)}
+      {escapeHtml(question.text)}
       <div class={styles.Buttons}>
         {canDelete ? (
           <form

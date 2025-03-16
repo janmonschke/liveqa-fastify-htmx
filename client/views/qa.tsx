@@ -1,11 +1,11 @@
-import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
-import { Html } from "@kitajs/html";
-import { Static, Type } from "@fastify/type-provider-typebox";
+import type { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
+import { escapeHtml } from "@kitajs/html";
+import { type Static, Type } from "@fastify/type-provider-typebox";
 import { RouteProps } from "../../types";
 import {
   extractParticipant,
   withParticipant,
-} from "../guards/with-participant";
+} from "../guards/with-participant.server";
 import { qaSse, qaTopicsList } from "../urls";
 import "./qa.client.ts";
 import { ParticipantTopicList } from "../components/participant/ParticipantTopicList";
@@ -23,11 +23,7 @@ export const schema: FastifySchema = {
   params,
 };
 
-export const head = (
-  <>
-    <title>LiveQa</title>
-  </>
-);
+export const head = <title>LiveQa</title>;
 
 export default async function ({
   req,
@@ -39,7 +35,7 @@ export default async function ({
 
   return (
     <section hx-ext="sse" sse-connect={qaSse(qaId)}>
-      <h1>{Html.escapeHtml(qa.title)}</h1>
+      <h1>{escapeHtml(qa.title)}</h1>
       <div
         id="participant-topic-list"
         hx-get={qaTopicsList(qaId)}

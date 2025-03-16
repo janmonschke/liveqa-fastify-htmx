@@ -9,7 +9,7 @@ import {
 import {
   extractParticipant,
   withParticipant,
-} from "../../guards/with-participant";
+} from "../../guards/with-participant.server";
 
 export const path = "/qa/:qaId/question/delete";
 export const method = "post";

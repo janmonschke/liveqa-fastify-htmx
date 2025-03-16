@@ -4,7 +4,7 @@ import { RouteProps } from "../../../types";
 import {
   extractParticipant,
   withParticipant,
-} from "../../guards/with-participant";
+} from "../../guards/with-participant.server";
 import { QuestionList } from "../../components/participant/QuestionList";
 import { fetchQuestionsForTopic } from "../../fetch.server";
 

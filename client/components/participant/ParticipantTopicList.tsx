@@ -1,7 +1,7 @@
-import { Html } from "@kitajs/html";
+import { escapeHtml } from "@kitajs/html";
 import { QuestionList, questionListElementForTopicIc } from "./QuestionList";
 import { qaQuestionCrud } from "../../urls";
-import { TopicWithQuestionsAndVotes } from "../../../types";
+import type { TopicWithQuestionsAndVotes } from "../../../types";
 import baseStyles from "../../assets/base.module.css";
 import { Button } from "../Button";
 
@@ -17,7 +17,7 @@ export function ParticipantTopicList({
       <ol class={baseStyles.OrderedList}>
         {topics.map((topic) => (
           <li>
-            <h2>{Html.escapeHtml(topic.title)}</h2>
+            <h2>{escapeHtml(topic.title)}</h2>
             <QuestionList
               participantId={participantId}
               topicId={topic.id}

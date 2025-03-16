@@ -1,6 +1,6 @@
-import Html from "@kitajs/html";
+import { escapeHtml } from "@kitajs/html";
 import styles from "./Toast.module.css";
-import { FastifyReply } from "fastify";
+import type { FastifyReply } from "fastify";
 export const TOAST_CONTAINER_ID = "toast-container";
 
 export function ToastContainer() {
@@ -19,7 +19,7 @@ export function ToastContent({
       class={[styles.ToastContent, type === "error" && styles.Error]}
       onclick="this.remove()"
     >
-      {Html.escapeHtml(message)}
+      {escapeHtml(message)}
     </div>
   );
 }

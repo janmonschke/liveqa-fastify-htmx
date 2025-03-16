@@ -5,7 +5,7 @@ import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
 import {
   extractParticipant,
   withParticipant,
-} from "../../guards/with-participant";
+} from "../../guards/with-participant.server";
 import { ParticipantTopicList } from "../../components/participant/ParticipantTopicList";
 
 export const path = `/qa/:qaId/topics`;

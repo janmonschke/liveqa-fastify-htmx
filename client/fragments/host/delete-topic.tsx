@@ -1,6 +1,6 @@
 import { Static, Type } from "@fastify/type-provider-typebox";
 import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
-import { isQaAdmin } from "../../guards/is-qa-admin";
+import { isQaAdmin } from "../../guards/is-qa-admin.server";
 import { RouteProps } from "../../../types";
 import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";

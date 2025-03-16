@@ -1,9 +1,9 @@
-import { Html } from "@kitajs/html";
-import { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
-import { Static, Type } from "@fastify/type-provider-typebox";
-import { isQaAdmin } from "../guards/is-qa-admin";
+import { escapeHtml } from "@kitajs/html";
+import type { FastifySchema, preHandlerAsyncHookHandler } from "fastify";
+import { type Static, Type } from "@fastify/type-provider-typebox";
+import { isQaAdmin } from "../guards/is-qa-admin.server";
 import { ensureAuthenticated } from "../jwt.server";
-import { RouteProps } from "../../types";
+import type { RouteProps } from "../../types";
 import { qa as qaUrl, qaQr } from "../urls";
 import QaConfigForm from "../components/host/QaConfigForm";
 import { AddTopicForm } from "../components/host/AddTopicForm";
@@ -35,7 +35,7 @@ export default async function ({
 
   return (
     <section>
-      <h1>{Html.escapeHtml(qa.title)}</h1>
+      <h1>{escapeHtml(qa.title)}</h1>
       <section class={styles.Links}>
         <a href={qaQr(qa.id)} target="_blank" rel="noreferrer">
           Open QR code

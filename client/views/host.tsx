@@ -1,8 +1,11 @@
-import { Html } from "@kitajs/html";
+import { escapeHtml } from "@kitajs/html";
 import { ensureAuthenticated, extractUser } from "../jwt.server";
 import { RouteProps } from "../../types";
 import { QaList } from "../components/host/QaList";
+import type { RouteProps } from "../../types";
 import { AddQaForm } from "../components/host/AddQaForm";
+import { db } from "../db.server";
+import { qaAdmin } from "../urls";
 
 export const path = "/host";
 

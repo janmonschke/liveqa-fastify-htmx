@@ -1,5 +1,5 @@
-import { Html } from "@kitajs/html";
-import { TopicWithQuestions } from "../../../types";
+import { escapeHtml } from "@kitajs/html";
+import type { TopicWithQuestions } from "../../../types";
 import { qaTopicDelete, qaTopicSwap } from "../../urls";
 import { Button } from "../Button";
 import styles from "./HostQaTopic.module.css";
@@ -19,7 +19,7 @@ export function HostQaTopic({
 }) {
   return (
     <div>
-      <h3 class={styles.Title}>{Html.escapeHtml(topic.title)}</h3>
+      <h3 class={styles.Title}>{escapeHtml(topic.title)}</h3>
       <div class={styles.Actions}>
         {index !== 0 ? (
           <form

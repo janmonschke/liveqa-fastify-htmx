@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "@kitajs/html";
+import type { PropsWithChildren } from "@kitajs/html";
 import clsx from "clsx";
 
 import styles from "./Button.module.css";

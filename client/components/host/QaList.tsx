@@ -1,4 +1,4 @@
-import { Html } from "@kitajs/html";
+import { escapeHtml } from "@kitajs/html";
 import { db } from "../../db.server";
 import { qaAdmin } from "../../urls";
 
@@ -15,7 +15,7 @@ export async function QaList({ hostId }: { hostId: string }) {
         <ul>
           {qas.map((qa) => (
             <li>
-              <a href={qaAdmin(qa.id)}>{Html.escapeHtml(qa.title)}</a>
+              <a href={qaAdmin(qa.id)}>{escapeHtml(qa.title)}</a>
             </li>
           ))}
         </ul>

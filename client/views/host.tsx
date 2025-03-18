@@ -12,14 +12,13 @@ export default async function HostPage({ req }: RouteProps) {
 
   return (
     <div>
-      <h1>QAs</h1>
-      <div id="host-qalist">
+      <h1 class="title is-1">QAs</h1>
+      <div id="host-qalist" class="mb-5">
         <QaList hostId={user.id} />
       </div>
       <div id="host-addqaform">
         <AddQaForm hostId={user.id} />
       </div>
-      <div id="host-errormessage"></div>
     </div>
   );
 }

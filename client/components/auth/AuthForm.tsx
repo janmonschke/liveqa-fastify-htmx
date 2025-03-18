@@ -1,4 +1,4 @@
-import { CenteredMediumContainer } from "../CenteredMediumContainer";
+import { Button } from "../Button";
 import { ErrorMessage } from "../ErrorMessage";
 import styles from "./AuthForm.module.css";
 
@@ -9,49 +9,59 @@ type Props = {
   error?: string;
 };
 export function AuthForm({ action, actionLabel, headline, error }: Props) {
-  const isLoading = false;
   return (
-    <CenteredMediumContainer id="authform">
-      <h1 safe>{headline}</h1>
+    <section id="authform" class={styles.AuthForm}>
+      <h1 class="title is-1" safe>
+        {headline}
+      </h1>
       <form
         method="post"
         action={action}
         hx-boost="true"
         hx-replace-url="false"
         hx-target="#authform"
+        hx-disabled-elt="input, button"
+        hx-indicator="find button"
       >
-        <label for="username" class={styles.Label}>
-          Username:
-        </label>
-        <input
-          type="text"
-          name="username"
-          required
-          minlength={3}
-          disabled={isLoading}
-          class={styles.Input}
-          id="username-input"
-          hx-preserve="true"
-        />
-        <label for="password" class={styles.Label}>
-          Password:
-        </label>
-        <input
-          type="password"
-          name="password"
-          autocomplete="current-password"
-          required
-          minlength={1}
-          disabled={isLoading}
-          class={styles.Input}
-          id="password-input"
-          hx-preserve="true"
-        />
+        <div class="field">
+          <label for="username" class="label">
+            Username:
+          </label>
+          <input
+            type="text"
+            name="username"
+            required
+            minlength={3}
+            class="input"
+            id="username-input"
+            hx-preserve="true"
+          />
+        </div>
+        <div class="field">
+          <label for="password" class="label">
+            Password:
+          </label>
+          <input
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            required
+            minlength={1}
+            class="input"
+            id="password-input"
+            hx-preserve="true"
+          />
+        </div>
         {error && <ErrorMessage message={error} />}
-        <button disabled={isLoading} safe>
-          {actionLabel}
-        </button>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <Button variant="primary" safe>
+              {actionLabel}
+            </Button>
+          </div>
+        </div>
       </form>
-    </CenteredMediumContainer>
+    </section>
   );
 }

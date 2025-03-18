@@ -1,8 +1,9 @@
-.Label {
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+.AuthForm {
+  width: 320px;
 }
 
-.Input {
-  margin-bottom: 1.5rem;
+@media (min-width: 600px) {
+  .AuthForm {
+    width: 400px;
+  }
 }

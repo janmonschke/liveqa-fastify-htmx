@@ -6,7 +6,7 @@ import styles from "./default.module.css";
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <div class={styles.Contents}>
-      {children}
+      <div class="container">{children}</div>
       <ToastContainer />
     </div>
   );

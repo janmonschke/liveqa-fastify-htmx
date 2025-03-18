@@ -2,14 +2,15 @@ export const path = "/";
 
 export const head = (
   <>
-    <title>Welcome to @fastify/htmx!</title>
+    <title>Live QA - Ask your questions</title>
   </>
 );
 
 export default function () {
   return (
-    <>
-      <h1>LiveQA</h1>
-    </>
+    <section class="container">
+      <h1 class="title is-1">Live QA</h1>
+      <h2 class="subtitle is-2">- in private beta -</h2>
+    </section>
   );
 }

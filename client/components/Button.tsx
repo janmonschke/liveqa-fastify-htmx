@@ -4,17 +4,19 @@ import clsx from "clsx";
 import styles from "./Button.module.css";
 
 type Size = "small" | "medium" | "large";
-type Variant = "default" | "error";
+type Variant = "default" | "primary" | "link" | "error";
 
 const SizeToClass: Record<Size, string> = {
-  small: styles.Small,
-  medium: styles.Medium,
-  large: styles.Large,
+  small: "is-small",
+  medium: "is-normal",
+  large: "is-medium",
 };
 
-const VariantToClass = {
+const VariantToClass: Record<Variant, string> = {
   default: "",
-  error: "error",
+  primary: "is-link", // yes, this is the bulma class for link, but I prefer it over the primary
+  link: "is-primary",
+  error: "is-danger",
 };
 
 export function Button({
@@ -28,7 +30,12 @@ export function Button({
     variant?: Variant;
   } & JSX.HtmlButtonTag
 >) {
-  const klass = clsx(styles.Button, SizeToClass[size], VariantToClass[variant]);
+  const klass = clsx(
+    "button",
+    styles.Button,
+    SizeToClass[size],
+    VariantToClass[variant]
+  );
 
   return (
     <button type="submit" class={klass} {...rest}>

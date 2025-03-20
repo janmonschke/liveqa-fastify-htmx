@@ -37,7 +37,7 @@ export default async function ({
   return (
     <section hx-ext="sse" sse-connect={qaSse(qaId)}>
       <QuestionModal />
-      <h1>{escapeHtml(qa.title)}</h1>
+      <h1 class="title is-3 mb-4">{escapeHtml(qa.title)}</h1>
       <div
         id="participant-topic-list"
         hx-get={qaTopicsList(qaId)}

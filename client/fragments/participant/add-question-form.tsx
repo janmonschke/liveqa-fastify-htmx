@@ -30,8 +30,8 @@ export default async function ({
   const topic = await db.topic.findFirstOrThrow({ where: { id: topicId } });
   return (
     <div>
-      <h3>
-        Add question to <code>{escapeHtml(topic.title)}</code>
+      <h3 class="subtitle is-5 mb-4">
+        Add question to: <code>{escapeHtml(topic.title)}</code>
       </h3>
       <form
         method="post"
@@ -45,7 +45,16 @@ export default async function ({
         {...{ "hx-on::after-request": hideQuestionDialog }}
       >
         <input type="hidden" name="topicId" value={topicId} />
-        <input type="text" placeholder="Question..." name="text" required />
+        <div class="field">
+          <input
+            type="text"
+            placeholder="Question..."
+            name="text"
+            class="input"
+            required
+            style={{ width: "100%" }}
+          />
+        </div>
         <Button>Add question</Button>
       </form>
     </div>

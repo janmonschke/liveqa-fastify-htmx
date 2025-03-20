@@ -1,11 +1,25 @@
 .Question {
+  width: 100%;
+}
+
+.Container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+@media (min-width: 600px) {
+  .Container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+  }
 }
 
 .Buttons {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.5em;
 }

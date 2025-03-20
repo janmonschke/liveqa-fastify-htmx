@@ -44,6 +44,9 @@ export default async function ({
       text,
       participantId: participant.id,
     },
+    include: {
+      votes: true,
+    },
   });
   emitQaChangedEvent(qaId, qaTopicChangedEventName(topicId));
   return (

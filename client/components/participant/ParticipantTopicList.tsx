@@ -16,8 +16,8 @@ export function ParticipantTopicList({
     <section>
       <ol class={baseStyles.OrderedList}>
         {topics.map((topic) => (
-          <li>
-            <h2>{escapeHtml(topic.title)}</h2>
+          <li class="mb-4">
+            <h3 class="subtitle is-5 mb-2">{escapeHtml(topic.title)}</h3>
             <QuestionList
               participantId={participantId}
               topicId={topic.id}
@@ -29,6 +29,8 @@ export function ParticipantTopicList({
               hx-trigger="mouseover,focus"
               hx-target={`#${questionModalId}`}
               onclick={showQuestionDialog}
+              size="small"
+              variant="primary"
             >
               Add question
             </Button>

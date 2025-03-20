@@ -54,6 +54,6 @@ export function qaConfigCrud(qaId: string) {
   return `${qaAdmin(qaId)}/config`;
 }
 
-export function qaAdminQuestionCrud(qaId: string) {
-  return `${qaAdmin(qaId)}/question`;
+export function qaAdminQuestionDelete(qaId: string, questionId: string) {
+  return `${qaAdmin(qaId)}/question/${questionId}/delete`;
 }

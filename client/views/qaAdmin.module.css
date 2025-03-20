@@ -1,5 +1,9 @@
 .Links {
   display: flex;
-  gap: 1em;
+  gap: 0.75em;
   align-items: center;
+}
+
+.AddTopicContainer {
+  max-width: 60%;
 }

@@ -56,9 +56,7 @@ export function AuthForm({ action, actionLabel, headline, error }: Props) {
 
         <div class="field is-grouped">
           <div class="control">
-            <Button variant="primary" safe>
-              {actionLabel}
-            </Button>
+            <Button safe>{actionLabel}</Button>
           </div>
         </div>
       </form>

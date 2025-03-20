@@ -1,8 +1,10 @@
 import { escapeHtml } from "@kitajs/html";
-import type { TopicWithQuestions } from "../../../types";
+import type { TopicWithQuestionsAndVotes } from "../../../types";
 import { qaTopicDelete, qaTopicSwap } from "../../urls";
 import { Button } from "../Button";
 import styles from "./HostQaTopic.module.css";
+import { DeleteIcon, ThickArrowDown, ThickArrowUp } from "../icons/Icons";
+import { HostQuestion } from "./HostQuestion";
 
 export function hostQaTopicId(topicId: string) {
   return `qa-admin-topic-${topicId}`;
@@ -13,14 +15,14 @@ export function HostQaTopic({
   topics,
   index,
 }: {
-  topic: TopicWithQuestions;
-  topics: TopicWithQuestions[];
+  topic: TopicWithQuestionsAndVotes;
+  topics: TopicWithQuestionsAndVotes[];
   index: number;
 }) {
   return (
-    <div>
-      <h3 class={styles.Title}>{escapeHtml(topic.title)}</h3>
-      <div class={styles.Actions}>
+    <div class={styles.Container}>
+      <div class={styles.Header}>
+        <h3 class="subtitle is-5 mb-0">{escapeHtml(topic.title)}</h3>
         {index !== 0 ? (
           <form
             method="post"
@@ -41,7 +43,11 @@ export function HostQaTopic({
               name="newPositionB"
               value={topic.order.toString()}
             />
-            <Button>Up</Button>
+            <Button size="small" title="Move topic up">
+              <span class="icon">
+                <ThickArrowUp />
+              </span>
+            </Button>
           </form>
         ) : null}
         {index < topics.length - 1 ? (
@@ -64,7 +70,11 @@ export function HostQaTopic({
               name="newPositionB"
               value={topic.order.toString()}
             />
-            <Button>Down</Button>
+            <Button size="small" title="Move topic down">
+              <span class="icon">
+                <ThickArrowDown />
+              </span>
+            </Button>
           </form>
         ) : null}
         <form
@@ -77,9 +87,20 @@ export function HostQaTopic({
           hx-swap="outerHTML"
         >
           <input type="hidden" name="topicId" value={topic.id} />
-          <Button variant="error">Delete</Button>
+          <Button size="small" variant="error" title="Delete topic">
+            <span class="icon">
+              <DeleteIcon />
+            </span>
+          </Button>
         </form>
       </div>
+      <ol class={styles.QuestionList}>
+        {topic.questions.map((question) => (
+          <li class="mb-3">
+            <HostQuestion qaId={topic.qaId} question={question} />
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }

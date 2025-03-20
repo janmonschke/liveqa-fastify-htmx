@@ -1,10 +1,16 @@
-.Title {
-  padding-bottom: 0.2em;
+.Container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
 }
 
-.Actions {
+.Header {
   display: flex;
   gap: 0.5em;
   flex-direction: row;
   align-items: center;
+}
+
+.QuestionList {
+  list-style-type: none;
 }

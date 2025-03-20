@@ -15,7 +15,9 @@ export async function QaList({ hostId }: { hostId: string }) {
         <ul>
           {qas.map((qa) => (
             <li>
-              <a href={qaAdmin(qa.id)}>{escapeHtml(qa.title)}</a>
+              <h3 class="subtitle is-5">
+                <a href={qaAdmin(qa.id)}>{escapeHtml(qa.title)}</a>
+              </h3>
             </li>
           ))}
         </ul>

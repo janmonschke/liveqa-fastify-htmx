@@ -4,7 +4,7 @@ import clsx from "clsx";
 import styles from "./Button.module.css";
 
 type Size = "small" | "medium" | "large";
-type Variant = "default" | "primary" | "link" | "error";
+type Variant = "default" | "primary" | "error";
 
 const SizeToClass: Record<Size, string> = {
   small: "is-small",
@@ -13,9 +13,8 @@ const SizeToClass: Record<Size, string> = {
 };
 
 const VariantToClass: Record<Variant, string> = {
-  default: "",
-  primary: "is-link", // yes, this is the bulma class for link, but I prefer it over the primary
-  link: "is-primary",
+  default: "is-link",
+  primary: "is-primary",
   error: "is-danger",
 };
 
@@ -32,6 +31,7 @@ export function Button({
 >) {
   const klass = clsx(
     "button",
+    "is-outlined",
     styles.Button,
     SizeToClass[size],
     VariantToClass[variant]

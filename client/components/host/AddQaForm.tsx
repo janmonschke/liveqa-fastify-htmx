@@ -16,9 +16,7 @@ export function AddQaForm({ hostId }: { hostId: string }) {
         <input type="hidden" name="hostId" value={hostId} />
       </div>
       <div class="field">
-        <Button type="submit" variant="primary">
-          Create QA
-        </Button>
+        <Button type="submit">Create QA</Button>
       </div>
     </form>
   );

@@ -35,6 +35,7 @@ export function QuestionListItem({
             hx-swap="outerHTML"
             hx-disabled-elt="find button"
             hx-indicator="find button"
+            hx-confirm={`Delete question: ${escapeHtml(question.text)}?`}
           >
             <input type="hidden" name="topicId" value={question.topicId} />
             <input type="hidden" name="questionId" value={question.id} />

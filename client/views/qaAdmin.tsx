@@ -35,8 +35,8 @@ export default async function ({
 
   return (
     <section>
-      <h1>{escapeHtml(qa.title)}</h1>
-      <section class={styles.Links}>
+      <h1 class="title is-3 mb-2">{escapeHtml(qa.title)}</h1>
+      <section class={[styles.Links, "mb-4"]}>
         <a href={qaQr(qa.id)} target="_blank" rel="noreferrer">
           Open QR code
           <ArrowTopRight />
@@ -46,13 +46,20 @@ export default async function ({
           <ArrowTopRight />
         </a>
       </section>
-      <h2>Config</h2>
-      {qa.QAConfig ? <QaConfigForm qaConfig={qa.QAConfig} /> : null}
-      <h2>Topics</h2>
-      <div id="qa-admin-topic-list">
-        <HostQaTopicsList topics={topics} />
-      </div>
-      <AddTopicForm qaId={qa.id} topics={topics} />
+      <section class="mb-4">
+        <h2 class="subtitle is-4 mb-2">Config</h2>
+        {qa.QAConfig ? <QaConfigForm qaConfig={qa.QAConfig} /> : null}
+      </section>
+      <section class="mb-4">
+        <h2 class="subtitle is-4 mb-2">Topics</h2>
+        <div id="qa-admin-topic-list">
+          <HostQaTopicsList topics={topics} />
+        </div>
+      </section>
+      <section class={styles.AddTopicContainer}>
+        <h3 class="subtitle is-5 mb-2">Add topic</h3>
+        <AddTopicForm qaId={qa.id} topics={topics} />
+      </section>
     </section>
   );
 }

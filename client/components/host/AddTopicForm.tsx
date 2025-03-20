@@ -1,5 +1,7 @@
 import type { Topic } from "@prisma/client";
 import { qaTopicCrud } from "../../urls";
+import { Button } from "../Button";
+import styles from "./AddTopicForm.module.css";
 
 export function AddTopicForm({
   qaId,
@@ -11,6 +13,7 @@ export function AddTopicForm({
   return (
     <form
       method="post"
+      class={styles.Form}
       action={qaTopicCrud(qaId)}
       hx-boost="true"
       hx-replace-url="false"
@@ -25,8 +28,14 @@ export function AddTopicForm({
           : 0
         ).toString()}
       />
-      <input type="text" placeholder="Topic title" name="title" required />
-      <button type="submit">Create topic</button>
+      <input
+        type="text"
+        class="input"
+        placeholder="Topic title"
+        name="title"
+        required
+      />
+      <Button type="submit">Create topic</Button>
     </form>
   );
 }

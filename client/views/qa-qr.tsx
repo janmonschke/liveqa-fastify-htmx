@@ -22,7 +22,7 @@ export default async function ({
   return (
     <section class={styles.Container}>
       <canvas id="qrcode" data-path={url} />
-      <h1 class={styles.Headline}>
+      <h1 class={["title", "is-4", styles.Headline]}>
         Add questions, vote for questions, fully anonymously.
       </h1>
     </section>

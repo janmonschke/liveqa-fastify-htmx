@@ -30,7 +30,7 @@ export default async function ({
   const topic = await db.topic.findFirstOrThrow({ where: { id: topicId } });
   return (
     <div>
-      <h3 class="subtitle is-5 mb-4">
+      <h3 class="subtitle is-5 mt-2 mb-4">
         Add question to: <code>{escapeHtml(topic.title)}</code>
       </h3>
       <form
@@ -46,16 +46,18 @@ export default async function ({
       >
         <input type="hidden" name="topicId" value={topicId} />
         <div class="field">
-          <input
-            type="text"
+          <textarea
+            class="textarea"
+            rows="2"
             placeholder="Question..."
             name="text"
-            class="input"
             required
             style={{ width: "100%" }}
-          />
+          ></textarea>
         </div>
-        <Button>Add question</Button>
+        <Button size="small" type="submit" class="mb-2">
+          Add question
+        </Button>
       </form>
     </div>
   );

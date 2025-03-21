@@ -1,13 +1,19 @@
 .Dialog {
   width: 320px;
-  display: flex;
+  margin: 100px auto;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.9);
   transition: opacity 0.1s ease-in, transform 0.1s ease-in;
 }
+
+@media (min-width: 600px) {
+  .Dialog {
+    width: 500px;
+  }
+}
+
 .Dialog[open] {
-  display: flex;
   opacity: 1;
   transform: scale(1);
   pointer-events: inherit;

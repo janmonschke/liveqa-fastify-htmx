@@ -29,12 +29,15 @@ export function Button({
     variant?: Variant;
   } & JSX.HtmlButtonTag
 >) {
+  const extraClass = rest["class"];
+  delete rest["class"];
   const klass = clsx(
     "button",
     "is-outlined",
     styles.Button,
     SizeToClass[size],
-    VariantToClass[variant]
+    VariantToClass[variant],
+    extraClass
   );
 
   return (

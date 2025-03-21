@@ -8,6 +8,15 @@
   gap: 0.3em;
 }
 
+.Buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* move buttons to the right */
+  align-self: end;
+  gap: 0.5em;
+}
+
 @media (min-width: 600px) {
   .Container {
     flex-direction: row;
@@ -15,11 +24,9 @@
     justify-content: space-between;
     gap: 1em;
   }
-}
 
-.Buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5em;
+  .Buttons {
+    /* make sure that on larger screens, the buttons are centered */
+    align-self: initial;
+  }
 }

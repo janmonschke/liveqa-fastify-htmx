@@ -2,6 +2,16 @@
   width: 100%;
 }
 
+.Resolved {
+  background: repeating-linear-gradient(
+    45deg,
+    #69748c11,
+    #69748c11 20px,
+    #fff 20px,
+    #fff 40px
+  );
+}
+
 .Container {
   display: flex;
   flex-direction: column;

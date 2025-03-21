@@ -8,8 +8,9 @@ import {
   emitQaChangedEvent,
   qaConfigChangedEventName,
 } from "../../../events.server";
+import { qaTopicChangedEventName } from "../../../events";
 
-export const path = "/qa/admin/:qaId/topic/delete";
+export const path = "/qa/admin/:qaId/question/:questionId/resolve";
 export const method = "post";
 
 export const preHandler: preHandlerAsyncHookHandler[] = [
@@ -19,8 +20,11 @@ export const preHandler: preHandlerAsyncHookHandler[] = [
 
 const params = Type.Object({
   qaId: Type.String({ minLength: 1 }),
+  questionId: Type.String({ minLength: 1 }),
 });
+
 const body = Type.Object({
+  isResolved: Type.Optional(Type.String()),
   topicId: Type.String(),
 });
 
@@ -35,13 +39,16 @@ export default async function ({
   Params: Static<typeof params>;
   Body: Static<typeof body>;
 }>) {
-  const { qaId } = req.params;
-  await db.topic.delete({
+  const { qaId, questionId } = req.params;
+  const { isResolved, topicId } = req.body;
+  await db.question.update({
     where: {
-      id: req.body.topicId,
-      qaId,
+      id: questionId,
+    },
+    data: {
+      resolved: !!isResolved,
     },
   });
-  emitQaChangedEvent(qaId, qaConfigChangedEventName(qaId));
+  emitQaChangedEvent(qaId, qaTopicChangedEventName(topicId));
   return "";
 }

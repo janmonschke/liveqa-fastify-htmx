@@ -63,6 +63,7 @@ model Question {
   localId       String      @default("")
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  resolved      Boolean     @default(false)
   participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
   participantId String
   text          String

@@ -25,7 +25,3 @@ export const db = remember(
       ],
     })
 );
-
-db.$on("query", (e) => {
-  console.log("Duration: " + e.duration + "ms");
-});

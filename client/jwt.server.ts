@@ -69,7 +69,7 @@ export function extractUser(req: FastifyRequest) {
     return user;
   } else {
     throw new Error(
-      "req.user is not defined. Make sure the route has a `authenticated` preHandler"
+      "req.user is not defined. Make sure the route has a `ensureAuthenticated,` preHandler"
     );
   }
 }

@@ -5,3 +5,15 @@
   justify-content: space-between;
   gap: 0.75em;
 }
+
+.Buttons,
+.CheckboxForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.Checkbox {
+  width: 28px;
+  height: 28px;
+}

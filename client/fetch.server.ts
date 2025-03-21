@@ -13,7 +13,11 @@ export async function fetchQaWithTopicsAndQuestions(qaId: string) {
         },
         include: {
           questions: {
-            orderBy: [{ votes: { _count: "desc" } }, { createdAt: "asc" }],
+            orderBy: [
+              { resolved: "asc" },
+              { votes: { _count: "desc" } },
+              { createdAt: "asc" },
+            ],
             include: {
               votes: true,
             },
@@ -29,7 +33,11 @@ export async function fetchQuestionsForTopic(topicId: string) {
     where: {
       topicId,
     },
-    orderBy: [{ votes: { _count: "desc" } }, { createdAt: "asc" }],
+    orderBy: [
+      { resolved: "asc" },
+      { votes: { _count: "desc" } },
+      { createdAt: "asc" },
+    ],
     include: {
       votes: true,
     },

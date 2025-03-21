@@ -61,3 +61,7 @@ export function qaConfigCrud(qaId: string) {
 export function qaAdminQuestionDelete(qaId: string, questionId: string) {
   return `${qaAdmin(qaId)}/question/${questionId}/delete`;
 }
+
+export function qaAdmingQuestionResolved(qaId: string, questionId: string) {
+  return `${qaAdmin(qaId)}/question/${questionId}/resolve`;
+}

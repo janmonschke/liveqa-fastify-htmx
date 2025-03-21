@@ -22,6 +22,10 @@ export function questionList(qaId: string, topicId: string) {
   return `${qa(qaId)}/topic/${topicId}/questions`;
 }
 
+export function questionListAdmin(qaId: string, topicId: string) {
+  return `${qa(qaId)}/admin/topic/${topicId}/questions`;
+}
+
 export function qaAddVote(qaId: string) {
   return `${qa(qaId)}/add-vote`;
 }

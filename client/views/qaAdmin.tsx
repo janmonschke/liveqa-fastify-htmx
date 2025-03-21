@@ -4,13 +4,15 @@ import { type Static, Type } from "@fastify/type-provider-typebox";
 import { isQaAdmin } from "../guards/is-qa-admin.server";
 import { ensureAuthenticated } from "../jwt.server";
 import type { RouteProps } from "../../types";
-import { qa as qaUrl, qaQr } from "../urls";
+import { qa as qaUrl, qaQr, qaSse } from "../urls";
 import QaConfigForm from "../components/host/QaConfigForm";
 import { AddTopicForm } from "../components/host/AddTopicForm";
 import { HostQaTopicsList } from "../components/host/HostQaTopicsList";
 import { fetchQaWithTopicsAndQuestions } from "../fetch.server";
 import { ArrowTopRight } from "../components/icons/Icons";
 import styles from "./qaAdmin.module.css";
+
+import "./qaAdmin.client.ts";
 
 export const path = "/qa/admin/:qaId";
 
@@ -34,7 +36,7 @@ export default async function ({
   const topics = qa.Topic || [];
 
   return (
-    <section>
+    <section hx-ext="sse" sse-connect={qaSse(qa.id)}>
       <h1 class="title is-3 mb-2">{escapeHtml(qa.title)}</h1>
       <section class={[styles.Links, "mb-4"]}>
         <a href={qaQr(qa.id)} target="_blank" rel="noreferrer">

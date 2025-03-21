@@ -4,7 +4,7 @@ import { qaTopicDelete, qaTopicSwap } from "../../urls";
 import { Button } from "../Button";
 import styles from "./HostQaTopic.module.css";
 import { DeleteIcon, ThickArrowDown, ThickArrowUp } from "../icons/Icons";
-import { HostQuestion } from "./HostQuestion";
+import { HostQuestionList } from "./HostQuestionList";
 
 export function hostQaTopicId(topicId: string) {
   return `qa-admin-topic-${topicId}`;
@@ -103,13 +103,11 @@ export function HostQaTopic({
             </Button>
           </form>
         </div>
-        <ol class={styles.QuestionList}>
-          {topic.questions.map((question) => (
-            <li class="mb-3">
-              <HostQuestion qaId={topic.qaId} question={question} />
-            </li>
-          ))}
-        </ol>
+        <HostQuestionList
+          qaId={topic.qaId}
+          topicId={topic.id}
+          questions={topic.questions}
+        />
       </div>
     </li>
   );

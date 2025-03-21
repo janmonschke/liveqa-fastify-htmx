@@ -9,11 +9,9 @@ export function HostQaTopicsList({
   topics: TopicWithQuestionsAndVotes[];
 }) {
   return (
-    <ol class={baseStyles.OrderedList}>
+    <ol class={baseStyles.OrderedList} id="qa-admin-topic-list-list">
       {topics.map((topic, index) => (
-        <li id={hostQaTopicId(topic.id)} class="mb-4">
-          <HostQaTopic topic={topic} topics={topics} index={index} />
-        </li>
+        <HostQaTopic topic={topic} topics={topics} index={index} />
       ))}
     </ol>
   );

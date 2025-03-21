@@ -7,7 +7,7 @@ import { db } from "../../db.server";
 import { ensureAuthenticated } from "../../jwt.server";
 import { AddTopicForm } from "../../components/host/AddTopicForm";
 import { fetchQaWithTopicsAndQuestions } from "../../fetch.server";
-import { HostQaTopic } from "../../components/host/HostQaTopic";
+import { HostQaTopic, hostQaTopicId } from "../../components/host/HostQaTopic";
 import {
   emitQaChangedEvent,
   qaConfigChangedEventName,
@@ -48,7 +48,9 @@ export default async function ({
       order: req.body.order,
     },
     include: {
-      questions: true,
+      questions: {
+        include: { votes: true },
+      },
     },
   });
   emitQaChangedEvent(qaId, qaConfigChangedEventName(qaId));
@@ -56,14 +58,12 @@ export default async function ({
   return (
     <>
       {/* Adds the item topic to the list */}
-      <div hx-swap-oob="beforeend:#qa-admin-topic-list ol">
-        <li>
-          <HostQaTopic
-            topic={topic}
-            topics={qa.Topic}
-            index={qa.Topic.length - 1}
-          />
-        </li>
+      <div hx-swap-oob="beforeend:#qa-admin-topic-list-list">
+        <HostQaTopic
+          topic={topic}
+          topics={qa.Topic}
+          index={qa.Topic.length - 1}
+        />
       </div>
       {/* Resets the form */}
       <AddTopicForm qaId={qaId} topics={qa.Topic} />

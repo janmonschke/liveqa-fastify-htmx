@@ -2,13 +2,22 @@
   width: 100%;
 }
 
+:root {
+  --question-stripe-color: #69748c11;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --question-stripe-color: #ababab21;
+  }
+}
+
 .Resolved {
   background: repeating-linear-gradient(
     45deg,
-    #69748c11,
-    #69748c11 20px,
-    #fff 20px,
-    #fff 40px
+    var(--question-stripe-color),
+    var(--question-stripe-color) 20px,
+    transparent 20px,
+    transparent 40px
   );
 }
 
